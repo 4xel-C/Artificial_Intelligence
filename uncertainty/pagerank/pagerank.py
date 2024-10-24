@@ -86,7 +86,33 @@ def sample_pagerank(corpus, damping_factor, n):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    raise NotImplementedError
+    
+    # initialize the dictionnary that will count how many pages will be visited
+    page_ranks = dict()
+    
+    # initialize a dictionnary that will keep in memory distribution probability of a page to avoid computing multiples times the same page.
+    distributions = dict()
+    
+    # choose the first page randomly and add it to the pagerank dict.
+    page = random.choice(list(corpus))
+    page_ranks[page] = 1
+    
+    # generate a sample of size n
+    for i in range(n):
+        if page not in distributions:
+            distributions[page] = transition_model(corpus, page, damping_factor)
+            
+        # select randomly a page from the probability distribution and update the current page
+        page = random.choices(list(distributions[page]), weights = list(distributions[page].values()), k=1)[0]
+        
+        # Add 1 to the page_ranks dictionnary, if the page does not exist, initialize the key to a value of 0
+        page_ranks[page] = page_ranks.get(page, 0) + 1
+    
+    # divide the count of each page by the size of the sample to give their probability
+    for p in page_ranks:
+        page_ranks[p] /= n
+    
+    return page_ranks
 
 
 def iterate_pagerank(corpus, damping_factor):
@@ -98,8 +124,36 @@ def iterate_pagerank(corpus, damping_factor):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    raise NotImplementedError
+    # saving the number of pages in a variable to avoid calculating the len multiple time
+    n = len(corpus)
+    
+    # initialization of starting page ranks as all equals
+    page_ranks = {page: (1/n) for page in corpus}
 
+    # loop until precision is enough
+    stop = False
+    while stop == False:
+        # comparing old_page_ranks to new
+        old_page_ranks = page_ranks.copy()
+        
+        # Computing page_rank calculation for each page
+        for page in corpus:
+            
+            # calculating the chance to be selected randomly by the damping factor
+            page_ranks[page] = (1 - damping_factor) / n
+            
+            # summing the probability of beeing accessed from another page
+            for other_page in corpus:
+                if page in corpus[other_page] and other_page != page:
+                    page_ranks[page] += damping_factor*(page_ranks[other_page]/len(corpus[other_page]))
+        
+        # if too much variation, continue the whole loop, if all values does not variate: set stop to True and break the while loop
+        for page in page_ranks:
+            if not old_page_ranks[page] - 0.001 <= page_ranks[page] <= old_page_ranks[page] + 0.001:
+                break
+            stop = True
+    
+    return page_ranks
 
 if __name__ == "__main__":
     main()
