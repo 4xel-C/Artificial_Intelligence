@@ -141,19 +141,39 @@ def iterate_pagerank(corpus, damping_factor):
             
             # calculating the chance to be selected randomly by the damping factor
             page_ranks[page] = (1 - damping_factor) / n
+
+            # if the page has no links:
+            if not is_linked(corpus, page):
+                for other_page in corpus:
+                    page_ranks[page] += damping_factor*(page_ranks[other_page]/len(corpus[other_page]))
             
             # summing the probability of beeing accessed from another page
-            for other_page in corpus:
-                if page in corpus[other_page] and other_page != page:
-                    page_ranks[page] += damping_factor*(page_ranks[other_page]/len(corpus[other_page]))
+            else:
+                for other_page in corpus:
+                    if page in corpus[other_page]:
+                        page_ranks[page] += damping_factor*(page_ranks[other_page]/len(corpus[other_page]))
         
         # if too much variation, continue the whole loop, if all values does not variate: set stop to True and break the while loop
         for page in page_ranks:
-            if not old_page_ranks[page] - 0.001 <= page_ranks[page] <= old_page_ranks[page] + 0.001:
+            if not old_page_ranks[page] - 0.0001 <= page_ranks[page] <= old_page_ranks[page] + 0.0001:
                 break
             stop = True
     
     return page_ranks
+
+def is_linked(corpus, page):
+    """
+    Check if a page is hyperlinked in another page of the corpus
+
+    Return True if there's a link for the page in any other page of the corpus. Return False other wise
+    """ 
+    for linked_pages in corpus.values():
+        if page in linked_pages:
+            return True
+    return False
+
+
+
 
 if __name__ == "__main__":
     main()
