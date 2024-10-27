@@ -16,7 +16,7 @@ def main():
     for page in sorted(ranks):
         print(f"  {page}: {ranks[page]:.4f}")
     ranks = iterate_pagerank(corpus, DAMPING)
-    print(f"PageRank Results from Iteration")
+    print("PageRank Results from Iteration")
     for page in sorted(ranks):
         print(f"  {page}: {ranks[page]:.4f}")
 
@@ -132,7 +132,7 @@ def iterate_pagerank(corpus, damping_factor):
 
     # loop until precision is enough
     stop = False
-    while stop == False:
+    while stop:
         # comparing old_page_ranks to new
         old_page_ranks = page_ranks.copy()
         
