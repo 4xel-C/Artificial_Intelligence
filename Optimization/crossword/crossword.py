@@ -45,6 +45,7 @@ class Crossword():
             self.height = len(contents)
             self.width = max(len(line) for line in contents)
 
+            # create a matrix of False / True velue depending if the cell accept a letter or not.
             self.structure = []
             for i in range(self.height):
                 row = []
@@ -61,7 +62,7 @@ class Crossword():
         with open(words_file) as f:
             self.words = set(f.read().upper().splitlines())
 
-        # Determine variable set
+        # Determine variable set (analyze the grid and get the starting point and the length of each words)
         self.variables = set()
         for i in range(self.height):
             for j in range(self.width):
@@ -125,6 +126,7 @@ class Crossword():
                         cells2.index(intersection)
                     )
 
+    # return a set of all variables overlapping with the argument (variable) of the function
     def neighbors(self, var):
         """Given a variable, return set of overlapping variables."""
         return set(
