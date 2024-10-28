@@ -45,7 +45,7 @@ class Crossword():
             self.height = len(contents)
             self.width = max(len(line) for line in contents)
 
-            # create a matrix of False / True velue depending if the cell accept a letter or not.
+            # create a 2D array of False / True values depending if the cell accept a letter or not.
             self.structure = []
             for i in range(self.height):
                 row = []
@@ -84,6 +84,7 @@ class Crossword():
                             i=i, j=j,
                             direction=Variable.DOWN,
                             length=length
+                            
                         ))
 
                 # Horizontal words
