@@ -99,7 +99,11 @@ class CrosswordCreator():
         (Remove any values that are inconsistent with a variable's unary
          constraints; in this case, the length of the word.)
         """
-        raise NotImplementedError
+        # iterate in all items inside domains, and compare the length of each variable with all the words.
+        for var, words in self.domains.items():
+            for word in words:
+                if var.length != len(word):
+                    self.domains[var].remove(word)
 
     def revise(self, x, y):
         """
@@ -110,7 +114,31 @@ class CrosswordCreator():
         Return True if a revision was made to the domain of `x`; return
         False if no revision was made.
         """
-        raise NotImplementedError
+        # Check if y is overlapping with x : return False if not the case
+        if self.crossword.overlaps[x, y] is None:
+            return False
+        
+        # if x and y overlap on the ith character of x and jth charater of y
+        i, j = self.crossword.overlaps[x, y]
+        
+        # iterate over all of possible words of domain x, and all of posible words of domain y and compare the character that should be the same.
+        domain_updated = False
+        for word_x in self.domains[x]:
+            
+            # keep track of a match to remove the word if needed
+            found_match = False
+            for word_y in self.domains[y]:
+                
+                # if there is a possible match, break and repeat to the next x words.
+                if word_x[i] == word_y[j]:
+                    domain_updated = True
+                    found_match = True
+                    break
+
+            if not found_match:
+                self.domains[x].remove(word_x)
+        
+        return True if domain_updated else False
 
     def ac3(self, arcs=None):
         """
@@ -121,21 +149,68 @@ class CrosswordCreator():
         Return True if arc consistency is enforced and no domains are empty;
         return False if one or more domains end up empty.
         """
-        raise NotImplementedError
+        if arcs is None:
+            # initialize arcs as an empty list; will store arcs as tupple (x, y) where x and y are variables
+            arcs = []
+            for var in self.domains:
+                neighbors = self.crossword.neighbors(var)
+                for neighbor in neighbors:
+                    arcs.append((var, neighbor))
+        
+        while arcs:
+            
+            # take the first element from the queue
+            x, y = arcs.pop(0)
+            
+            # try to revise the arc, and if it's revised, append all the arcs connected to it to the queues
+            if self.revise(x, y):
+                if not self.domains[x]:
+                    return False 
+                neighbors = self.crossword.neighbors(x)
+                for neighbor in neighbors:
+                    if neighbor != y:
+                        arcs.append((var, neighbor))
+                        
+        # return True if all arcs consistency are inforced
+        return True
 
     def assignment_complete(self, assignment):
         """
         Return True if `assignment` is complete (i.e., assigns a value to each
         crossword variable); return False otherwise.
         """
-        raise NotImplementedError
+        # compare the number of variable with the number of assignment and ensure that all variable in the domains are in the assigned dictionnary.
+        if len(self.domains) != len(assignment) or not all([var in assignment for var in self.domains]):
+            return False
+        
+        # ensure that all variables are assigned:
+        for var in assignment:
+            if not assignment[var]:
+                return False
+        
+        return True
 
     def consistent(self, assignment):
         """
         Return True if `assignment` is consistent (i.e., words fit in crossword
         puzzle without conflicting characters); return False otherwise.
         """
-        raise NotImplementedError
+        for var in assignment:
+            
+            # check length of assignment
+            if var.length != len(assignment[var]):
+                return False
+            
+            # check neighbors of each var in the assignement 
+            neighbors = self.crossword.neighbors(var)
+            for neighbor in neighbors:
+                if assignment[neighbor]:
+                    i, j = self.crossword.overlaps[var, neighbor]
+                    if assignment[var][i] != assignment[neighbor][j]:
+                        return False
+        
+        # Return True if no problem  
+        return True
 
     def order_domain_values(self, var, assignment):
         """
