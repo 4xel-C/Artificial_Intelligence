@@ -172,12 +172,14 @@ class CrosswordCreator():
             
             # try to revise the arc, and if it's revised, append all the arcs connected to it to the queues
             if self.revise(x, y):
+                
+                # if a domain happens to be empty => Wrong solution => return False
                 if not self.domains[x]:
                     return False 
                 neighbors = self.crossword.neighbors(x)
                 for neighbor in neighbors:
                     if neighbor != y:
-                        arcs.append((var, neighbor))
+                        arcs.append((neighbor, x))
                         
         # return True if all arcs consistency are inforced
         return True
@@ -281,6 +283,7 @@ class CrosswordCreator():
         for value in self.order_domain_values(var, assignment):
             new_assignment = assignment.copy()
             new_assignment[var] = value
+            # arc3 algorithm to be implemented here on the new assignement and his neighbors ?
             if self.consistent(new_assignment):
                 result = self.backtrack(new_assignment)
                 if result is not None:
