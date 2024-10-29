@@ -278,16 +278,31 @@ class CrosswordCreator():
         """
         if self.assignment_complete(assignment):
             return assignment
+        
+        # Select heuristicly a variable and a value in the domains (variable with the least variable and the most neighbors)
         var = self.select_unassigned_variable(assignment)
-        print(var)
         for value in self.order_domain_values(var, assignment):
             new_assignment = assignment.copy()
             new_assignment[var] = value
-            # arc3 algorithm to be implemented here on the new assignement and his neighbors ?
-            if self.consistent(new_assignment):
-                result = self.backtrack(new_assignment)
-                if result is not None:
-                    return result
+            
+            # Create a copy of the original domains to restore if inferences made on a wrong variable
+            original_domain = self.domains.copy()
+            
+            # Use ac3 algorithm on all neighbor Y of X to make inference on the domains if possible
+            # if ac3 leads to a domain with only 1 value possible, the heuristic selection in the backtrack function will automaticly pick it on the next iteration
+            self.ac3(arcs=[(neighbor, var) for neighbor in self.crossword.neighbors(var)])
+            
+            # if there is no empty domains (impossible) and asignment consistant: 
+            if all(len(self.domains[neighbor]) > 0 for neighbor in self.crossword.neighbors(var)):
+                if self.consistent(new_assignment):
+                    result = self.backtrack(new_assignment)
+                    if result is not None:
+                        return result
+                
+            # If the new_assignement is not consistent, restore original domain
+            self.domains = original_domain
+            
+        # return None if no solution possibles
         return None
                 
 def main():
