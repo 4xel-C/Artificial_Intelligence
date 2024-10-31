@@ -240,7 +240,10 @@ class MinesweeperAI:
 
             # Addition of new sentences that can be inferred from existing knowledge afer each sentences have been simplified
             for sentences in itertools.permutations(self.knowledge, 2):
+                
+                # Check if first sentence's cells is a subset of the other sentence
                 if sentences[0].cells < sentences[1].cells:
+                    # Create a new sentence infered by one sentence's cell beeing a subset of another.
                     new_sentence = Sentence(
                         (sentences[1].cells - sentences[0].cells),
                         (sentences[1].count - sentences[0].count),
