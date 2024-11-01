@@ -1,7 +1,9 @@
+# This script is an exemple of supervised learning classification (using various models) with holdout cross validation algorithm, implemented with sklearn
+# Try to predict if a banknotes is counterfeit or not
+
 import csv
 import random
-
-from sklearn import svm
+from sklearn.svm import SVC
 from sklearn.linear_model import Perceptron
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
@@ -23,6 +25,7 @@ with open("banknotes.csv") as f:
             "label": "Authentic" if row[4] == "0" else "Counterfeit"
         })
 
+# Hold-out cross validation
 # Separate data into training and testing groups
 holdout = int(0.40 * len(data))
 random.shuffle(data)
@@ -30,6 +33,8 @@ testing = data[:holdout]
 training = data[holdout:]
 
 # Train model on training set
+# X represent the input
+# Y represent the output
 X_training = [row["evidence"] for row in training]
 y_training = [row["label"] for row in training]
 model.fit(X_training, y_training)
