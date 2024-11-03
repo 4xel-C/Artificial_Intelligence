@@ -1,10 +1,11 @@
+# This script is an exemple of supervised learning classification (using various models) with holdout cross validation algorithm, implemented with sklearn
+# Try to predict if a banknotes is counterfeit or not
+
 import csv
 
 from sklearn import svm
 from sklearn.linear_model import Perceptron
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import KNeighborsClassifier
 
 model = Perceptron()
 # model = svm.SVC()
