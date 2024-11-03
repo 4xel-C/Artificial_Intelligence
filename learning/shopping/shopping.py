@@ -68,7 +68,7 @@ def load_data(filename):
             "Mar": 2,
             "Apr": 3,
             "May": 4,
-            "Jun": 5, 
+            "June": 5, 
             "Jul": 6,
             "Aug": 7,
             "Sep": 8,
@@ -135,7 +135,7 @@ def evaluate(labels, predictions):
 
     # Zip labels and predictions to iterate and compare each value
     for label, predicted in zip(labels, predictions):
-        if predicted == 1:
+        if label == 1:
             positive_count += 1
             if predicted == label:
                 true_positive_count += 1
@@ -146,7 +146,7 @@ def evaluate(labels, predictions):
 
     sensitivity = true_positive_count / positive_count
     specificity = true_negative_count / negative_count
-    
+
     return (sensitivity, specificity)
 
 
