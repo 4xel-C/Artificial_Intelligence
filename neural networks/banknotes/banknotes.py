@@ -3,6 +3,8 @@ import tensorflow as tf
 
 from sklearn.model_selection import train_test_split
 
+# Classification algorithm using neural networks to classify false banknotes from real ones.
+
 # Read data in from file
 with open("banknotes.csv") as f:
     reader = csv.reader(f)
@@ -25,7 +27,7 @@ X_training, X_testing, y_training, y_testing = train_test_split(
 # Create a neural network
 model = tf.keras.models.Sequential()
 
-# Add a hidden layer with 8 units, with ReLU activation
+# Add a hidden layer with 8 units, 4 inputs, with ReLU activation
 model.add(tf.keras.layers.Dense(8, input_shape=(4,), activation="relu"))
 
 # Add output layer with 1 unit, with sigmoid activation

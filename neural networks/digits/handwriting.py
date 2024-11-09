@@ -20,6 +20,7 @@ x_test = x_test.reshape(
 model = tf.keras.models.Sequential([
 
     # Convolutional layer. Learn 32 filters using a 3x3 kernel
+    # Each pixel has a dimension of 28x28 with only 1 chanel value (black and white color value)
     tf.keras.layers.Conv2D(
         32, (3, 3), activation="relu", input_shape=(28, 28, 1)
     ),
@@ -30,11 +31,12 @@ model = tf.keras.models.Sequential([
     # Flatten units
     tf.keras.layers.Flatten(),
 
-    # Add a hidden layer with dropout
+    # Add a hidden layer with dropout to avoid overfitting
     tf.keras.layers.Dense(128, activation="relu"),
     tf.keras.layers.Dropout(0.5),
 
     # Add an output layer with output units for all 10 digits
+    # softmax turn the output into a probability distribution
     tf.keras.layers.Dense(10, activation="softmax")
 ])
 

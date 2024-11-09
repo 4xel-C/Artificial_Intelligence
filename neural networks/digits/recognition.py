@@ -2,7 +2,6 @@ import numpy as np
 import pygame
 import sys
 import tensorflow as tf
-import time
 
 # Check command-line arguments
 if len(sys.argv) != 2:
@@ -66,6 +65,7 @@ while True:
             # Draw blank cell
             else:
                 pygame.draw.rect(screen, WHITE, rect)
+            # draw a rectangle border
             pygame.draw.rect(screen, BLACK, rect, 1)
 
             # If writing on this cell, fill in current cell and neighbors
