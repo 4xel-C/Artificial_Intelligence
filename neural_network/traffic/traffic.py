@@ -35,7 +35,7 @@ def main():
     model.fit(x_train, y_train, epochs=EPOCHS)
 
     # Evaluate neural network performance
-    model.evaluate(x_test,  y_test, verbose=2)
+    model.evaluate(x_test, y_test, verbose=2)
 
     # Save model to file
     if len(sys.argv) == 3:
@@ -76,13 +76,14 @@ def load_data(data_dir):
             img = cv2.imread(os.path.join(path, file))
             img = cv2.resize(img, (IMG_WIDTH, IMG_HEIGHT))
             # image normalization
-            img = img / 255 
+            img = img / 255
 
             # append resized image to the list with the corresponding label
             images.append(img)
             labels.append(label)
-    
+
     return (images, labels)
+
 
 def get_model():
     """
@@ -91,33 +92,30 @@ def get_model():
     The output layer should have `NUM_CATEGORIES` units, one for each category.
     """
     # Create a convolutional neural network
-    model = tf.keras.models.Sequential([
-
-    # Convolutional layer. Learn 32 filters using a 6x6 kernel
-    tf.keras.layers.Conv2D(
-        32, (6, 6), activation="relu", input_shape=(IMG_WIDTH, IMG_HEIGHT, 3)
-    ),
-
-    # Max-pooling layer, using 4x4 pool size
-    tf.keras.layers.MaxPooling2D(pool_size=(4, 4)),
-    # Flatten units
-    tf.keras.layers.Flatten(),
-
-    # Add a hidden layer with dropout
-    tf.keras.layers.Dense(256, activation="relu"),
-    tf.keras.layers.Dropout(0.4),
-
-    # Add an output layer with output units for all 10 digits
-    tf.keras.layers.Dense(NUM_CATEGORIES, activation="softmax")
-    ])
+    model = tf.keras.models.Sequential(
+        [
+            # Convolutional layer. Learn 32 filters using a 6x6 kernel
+            tf.keras.layers.Conv2D(
+                32, (6, 6), activation="relu", input_shape=(IMG_WIDTH, IMG_HEIGHT, 3)
+            ),
+            # Max-pooling layer, using 4x4 pool size
+            tf.keras.layers.MaxPooling2D(pool_size=(4, 4)),
+            # Flatten units
+            tf.keras.layers.Flatten(),
+            # Add a hidden layer with dropout
+            tf.keras.layers.Dense(256, activation="relu"),
+            tf.keras.layers.Dropout(0.4),
+            # Add an output layer with output units for all 10 digits
+            tf.keras.layers.Dense(NUM_CATEGORIES, activation="softmax"),
+        ]
+    )
 
     # Train neural network
     model.compile(
-    optimizer="adam",
-    loss="categorical_crossentropy",
-    metrics=["accuracy"]
-)
+        optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"]
+    )
     return model
+
 
 if __name__ == "__main__":
     main()
