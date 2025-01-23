@@ -2,7 +2,7 @@
 
 In this repository, you will find all the source code, exercises, and projects written for the CS50 AI certification.
 
-## [Search](Search)
+## [Search](search)
 Contains all codes related to search algorithms.
 
 * **degrees**: Project to find the connection between two actors using a movies database. Makes use of the **Depth-First Search** algorithm with a *StackFrontier* or the **Breadth-First Search** algorithm with a *QueueFrontier*.
