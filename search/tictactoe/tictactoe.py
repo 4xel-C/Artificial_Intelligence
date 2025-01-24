@@ -6,7 +6,7 @@ import math
 import copy
 
 X = "X"
-O = "O"  # noqa: E741
+O = "O"  
 EMPTY = None
 
 
