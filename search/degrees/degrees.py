@@ -100,7 +100,7 @@ def shortest_path(source, target):
     explored_nodes = set()
 
     start = Node(state=source, parent=None, action=None)
-    frontier = StackFrontier()
+    frontier = QueueFrontier()
     frontier.add(start)
 
     # starting the search algorithm
