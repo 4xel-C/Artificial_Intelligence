@@ -42,9 +42,16 @@ Contains all source code related to machine learning using sklearn package in Py
 * **Banknotes**: Use sklearn with varioous model to try to predict if a banknote is a counterfeit or not.
 
 ## **Neural Network**
-Countains all source code related to Neural Network.
+Contains all source code related to Neural Network.
 * **Traffic**: Use TensorFlow to build neural network to recognize traffic sign on photographs.
 * **Digits**: Use TensorFlow to build a model to recognize handwritten digits on a PyGame interface.
 
+## **Language**
+Contains source code related to processing natural language.
+* **Sentiment**: Use Naive Bayes Classifier using NLTK library to implements a sentiment analysis tool.
+* **Cfg**: Implementation of a simple sentence parser using Context Free Grammar using NLTK.
+* **Parser**: Implementation of a more ocmplex sentence parser using Context Free Grammar with NL
+* **Markov**: Simple text generator using Markov chains with the `markovify` library.
+* **Language**: Implementation of a BERT-based masked language model using the transfomers library to visualizes the attention scores from the model. 
 
 
