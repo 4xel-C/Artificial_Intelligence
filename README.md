@@ -15,14 +15,11 @@ Contains all codes related to knowledge (propositional logic algorithms) and inf
 * **[Knights](knowledge/knights/)**: Project representing the Knights and Knaves puzzle, where knights tell the truth and knaves lie. The objective is to determine who is a knight and who is a knave.
 * **[Minesweeper](knowledge/minesweeper/)**: Minesweeper implemented with Pygame, where an AI plays the best moves using logic. It maintains a knowledge base to track which areas are potentially mined or safe and infers safe areas.
 
-## Uncertainty
+##  [Uncertainty](/uncertainty)
 Contains all soruce codes related to Bayesian Networks and Markov Chain models.
 
-* **Bayesnet**: Bayesian model implemented using Python's pomegranate library. Represents the probability of missing an appointment depending on other variables like train maintenance and weather. Tests various possibilities to compute probabilities and inference, using or not using likelihood weighting and sampling.
-* **Chain**: Example of a Markov Chain implemented with pomegranate.
-* **Pagerank**: Representation of Larry Page's algorithm for determining the quality of a page by ranking them based on the number of times they are clicked, using a Markov Chain representation.
-* **Heredity**: Implementation from scratch of a Bayesian model used to determine the probability of parents in a family passing down the GJB2 gene mutation (related to hearing impairment) to their children, depending on whether they themselves carry the trait.
-* **Hmm**: Implementation of a simple hidden markov chain using pomegranate package to predict sunny from rainy days depending on wether or not peoples are bring umbrellas.
+* **[Pagerank](/uncertainty/pagerank/)**: Representation of Larry Page's algorithm for determining the quality of a page by ranking them based on the number of times they are clicked, using a Markov Chain representation.
+* **[Heredity](/uncertainty/heredity/)**: Implementation from scratch of a Bayesian model used to determine the probability of parents in a family passing down the GJB2 gene mutation (related to hearing impairment) to their children, depending on whether they themselves carry the trait.
 
 ## Optimization
 Contains all source codes related to optimization algorithms developed using AI.
