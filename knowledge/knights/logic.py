@@ -234,7 +234,7 @@ def model_check(knowledge, query):
         # If model has an assignment for each symbol
         if not symbols:
 
-            # If knowledge base is true in model, then query must also be true
+            # If knowledge base is true in model, then query must also be true, if knowledge base is not true, then KB cannot entails the query (KB => query): if not kb, then true, independtly if query if True or false (propositional logic for entailments)
             if knowledge.evaluate(model):
                 return query.evaluate(model)
             return True
