@@ -9,11 +9,11 @@ Contains all codes related to search algorithms.
 * **[Maze](search/maze/)**: Project to draw a maze and its solution to visualize how the algorithm solves the problem. Uses the **Depth-First Search** algorithm with a *StackFrontier* or the **Breadth-First Search** algorithm with a *QueueFrontier*, and outputs the result as a `.png` image file.
 * **[Tictactoe](search/tictactoe/)**: Project using Pygame for a Tic-Tac-Toe game, implementing the **Minimax** algorithm with *alpha-beta pruning* optimization.
 
-## Knowledge
+## [Knowledge](knowledge/)
 Contains all codes related to knowledge (propositional logic algorithms) and inference.
 
-* **Knights**: Project representing the Knights and Knaves puzzle, where knights tell the truth and knaves lie. The objective is to determine who is a knight and who is a knave.
-* **Minesweeper**: Minesweeper implemented with Pygame, where an AI plays the best moves using logic. It maintains a knowledge base to track which areas are potentially mined or safe and infers safe areas.
+* **[Knights](knowledge/knights/)**: Project representing the Knights and Knaves puzzle, where knights tell the truth and knaves lie. The objective is to determine who is a knight and who is a knave.
+* **[Minesweeper](knowledge/minesweeper/)**: Minesweeper implemented with Pygame, where an AI plays the best moves using logic. It maintains a knowledge base to track which areas are potentially mined or safe and infers safe areas.
 
 ## Uncertainty
 Contains all soruce codes related to Bayesian Networks and Markov Chain models.
