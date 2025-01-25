@@ -89,6 +89,9 @@ class Sentence:
     Logical statement about a Minesweeper game
     A sentence consists of a set of board cells,
     and a count of the number of those cells which are mines.
+    A sentence is generated each time a cell is uncovered
+        => It will give the number of mines in the adjacent cell
+        => And which cells are concerned by this number of mines.
     """
 
     def __init__(self, cells, count):
@@ -194,7 +197,9 @@ class MinesweeperAI:
         # mark the cell as safe (update self.safes and update all sentences with the safe cell)
         self.mark_safe(cell)
 
-        # Generate a set of cells and Loop  through the cells around the move to count the mines
+        # Generate a new sentence from the move and add it to the KB:
+        #   -Give the count of mines of the proximate cells
+        #   -Give the coordinate of al the cell concerned by the count
         set_cells = set()
         for i in range(cell[0] - 1, cell[0] + 2):
             for j in range(cell[1] - 1, cell[1] + 2):
@@ -215,7 +220,10 @@ class MinesweeperAI:
         # adding new sentence to the knowledge
         self.knowledge.append(Sentence(set_cells, count))
 
-        # new knowledge based on AI's knowledge base's conclusion, in a loop so each new sentences restart the whole process in case it generate new conclusions
+
+        # Update the knowledge base if new inferences can be made from the additional informations
+        #   ->If new information, update the KB and loop through all sentances to mark the safe or the mines to simplify each sentences.
+        #   ->loop again until no inference can be made 
         kb_changed = True
         while kb_changed:
             kb_changed = False
