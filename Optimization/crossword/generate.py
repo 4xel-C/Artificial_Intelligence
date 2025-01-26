@@ -1,6 +1,6 @@
 import sys
 
-from crossword import *  # noqa: F403
+from crossword import *  
 
 
 class CrosswordCreator():
@@ -263,6 +263,7 @@ class CrosswordCreator():
         """
         # Recuperated variables not assigned:
         var_list = [var for var in self.domains if var not in assignment]
+
         # sort the list by minimum values heuristic, and if equal domains, sort by descending number of neighbor
         var_list.sort(key=lambda x: (len(self.domains[x]), -len(self.crossword.neighbors(x))))
         return var_list[0] if var_list else None
@@ -287,6 +288,8 @@ class CrosswordCreator():
             
             # Create a copy of the original domains to restore if inferences made on a wrong variable
             original_domain = self.domains.copy()
+
+            # Domain should be modified here to only contain the value assigned for the variable, so it's taken into consideration while doing the AC3 algorithm
             
             # Use ac3 algorithm on all neighbor Y of X to make inference on the domains if possible
             # if ac3 leads to a domain with only 1 value possible, the heuristic selection in the backtrack function will automaticly pick it on the next iteration
