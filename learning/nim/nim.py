@@ -213,11 +213,11 @@ def train(n):
             state = game.piles.copy()
             action = player.choose_action(game.piles)
 
-            # Keep track of last state and action
+            # Keep track of last state and action for each player
             last[game.player]["state"] = state
             last[game.player]["action"] = action
 
-            # Make move
+            # Make move and switch player
             game.move(action)
             new_state = game.piles.copy()
 
