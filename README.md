@@ -34,14 +34,14 @@ Contains all source codes related to optimization algorithms developed using AI.
 ## **Learning**
 Contains all source code related to machine learning using sklearn package in Python.
 
-* **Shopping**: Build a nearest-neighbor classifier over a 12 000 user sessions to determine if a user will end up going through a purshase or not.
-* **Nim**: Train an IA using the Q-learning algorithm playing Nim game to compete against the player.
-* **Banknotes**: Use sklearn with varioous model to try to predict if a banknote is a counterfeit or not.
+* **[Shopping](/learning/shopping/)**: Build a nearest-neighbor classifier over a 12 000 user sessions to determine if a user will end up going through a purshase or not.
+* **[Nim](/learning/nim/)**: Train an IA using the Q-learning algorithm playing Nim game to compete against the player.
+* **[Banknotes](learning/lecture_source_codes/banknotes/)**: Use sklearn with varioous model to try to predict if a banknote is a counterfeit or not.
 
 ## **Neural Network**
 Contains all source code related to Neural Network.
-* **Traffic**: Use TensorFlow to build neural network to recognize traffic sign on photographs.
-* **Digits**: Use TensorFlow to build a model to recognize handwritten digits on a PyGame interface.
+* **[Traffic](/neural_network/traffic/)**: Use TensorFlow to build neural network to recognize traffic sign on photographs.
+* **[Digits](/neural_network/lecture_source_codes/digits/)**: Use TensorFlow to build a model to recognize handwritten digits on a PyGame interface.
 
 ## **Language**
 Contains source code related to processing natural language.
