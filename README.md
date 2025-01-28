@@ -45,10 +45,10 @@ Contains all source code related to Neural Network.
 
 ## **Language**
 Contains source code related to processing natural language.
-* **Sentiment**: Use Naive Bayes Classifier using NLTK library to implements a sentiment analysis tool.
-* **Cfg**: Implementation of a simple sentence parser using Context Free Grammar using NLTK.
-* **Parser**: Implementation of a more ocmplex sentence parser using Context Free Grammar with NL
-* **Markov**: Simple text generator using Markov chains with the `markovify` library.
-* **Language**: Implementation of a BERT-based masked language model using the transfomers library to visualizes the attention scores from the model. 
+* **[Attention](/language/attention/)**: Implementation of a BERT-based masked language model using the transfomers library to visualizes the attention scores from the model. 
+* **[Parser](/language/parser/)**: Implementation of a more ocmplex sentence parser using Context Free Grammar with NL
+* **[Sentiment](/language/lecture_source_codes/sentiment/)**: Use Naive Bayes Classifier using NLTK library to implements a sentiment analysis tool.
+* **[Cfg](/language/lecture_source_codes/cfg/)**: Implementation of a simple sentence parser using Context Free Grammar using NLTK.
+* **[Markov](/language/lecture_source_codes/markov/)**: Simple text generator using Markov chains with the `markovify` library.
 
 
